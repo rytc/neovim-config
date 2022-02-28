@@ -2,7 +2,7 @@ call plug#begin('~\AppData\Local\nvim-data\plugged')
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
+Plug 'https://tpope.io/vim/commentary.git'
 
 call plug#end()
 
@@ -11,6 +11,7 @@ color NeoSolarized
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autoindent
 set mouse=a
+set clipboard^=unnamed,unnamedplus
 
 let g:fzf_preview_window = []
 let g:fzf_layout = { 'down': '~25%' }
