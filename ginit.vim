@@ -1,1 +1,1 @@
-GuiFont! Hack:h14
+set guifont=Berkeley\ Mono:h7
