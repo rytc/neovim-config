@@ -1,3 +1,4 @@
+- [lazy.nvim](https://github.com/folke/lazy.nvim)
 - Theme: [NeoSolarized](https://github.com/overcache/NeoSolarized)
 - Jai syntax: [jai.vim](https://github.com/rytc/jai.vim)
 - [toggleterm](https://github.com/akinsho/toggleterm.nvim)
