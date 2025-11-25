@@ -87,7 +87,17 @@ require("lazy").setup({
     keys = {
         { "<Leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        theme = "solarized_dark",
+        icons_enabled = false
+      }
+    }
   }
+
 })
 
 local telescope = require('telescope.builtin')
