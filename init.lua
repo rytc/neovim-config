@@ -36,6 +36,9 @@ vim.o.splitbelow = true
 vim.o.scrolloff = 10
 vim.o.confirm = true
 
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·' }
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -44,11 +47,41 @@ vim.o.shiftwidth = 2
 
 vim.cmd [[set nowrap]]
 vim.cmd [[set expandtab]]
-vim.cmd [[colorscheme  NeoSolarized]]
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  'rytc/jai.vim',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    highlight = {
+      enable = true
+    },
+    config = function ()
+      require('nvim-treesitter.configs').setup({
+        highlight = {
+          enable = true
+        }
+      })
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.jai = {
+        install_info = {
+          url = "c:/Projects/tree-sitter-jai", -- local path or git repo
+          files = {"src/parser.c", "src/scanner.c"},
+        },
+        filetype = "jai"
+      }
+    end
+  },
+  {
+    "svrana/neosolarized.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("neosolarized")
+    end,
+    dependencies = {
+      "tjdevries/colorbuddy.nvim",
+    },
+  },
   {
     'akinsho/toggleterm.nvim', 
     version = "*", 
@@ -104,5 +137,21 @@ local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', telescope.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>b', telescope.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>g',  telescope.live_grep, { desc = 'Telescope grep' })
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>:q<cr>")
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+
+vim.lsp.config('jai', {
+  cmd = { '/Projects/Jails/bin/jails' },
+  filetypes = {'jai'},
+  root_markers = {'build.jai', 'main.jai', '.git'},
+  name = "Jails"
+})
+
+vim.lsp.enable('jai')
+
+vim.filetype.add({
+  extension = {
+      jai = "jai"
+  }
+})
+
 
