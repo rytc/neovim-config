@@ -15,35 +15,25 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-vim.o.number = true
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.o.number = true
 vim.o.ignorecase = true
 vim.o.smartcase =  true
-
 vim.o.signcolumn = 'yes'
-
 vim.o.timeoutlen = 300
-
 vim.o.splitright = true
 vim.o.splitbelow = true
-
 vim.o.scrolloff = 10
 vim.o.confirm = true
-
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·' }
-
--- Clear highlights on search when pressing <Esc> in normal mode
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·' }
 
 vim.cmd [[set nowrap]]
 vim.cmd [[set expandtab]]
@@ -138,6 +128,8 @@ vim.keymap.set('n', '<leader>f', telescope.find_files, { desc = 'Telescope find 
 vim.keymap.set('n', '<leader>b', telescope.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>g',  telescope.live_grep, { desc = 'Telescope grep' })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.lsp.config('jai', {
   cmd = { '/Projects/Jails/bin/jails' },
@@ -153,5 +145,3 @@ vim.filetype.add({
       jai = "jai"
   }
 })
-
-
